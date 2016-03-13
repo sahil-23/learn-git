@@ -2,11 +2,59 @@
 <html>
 	<head>
 		<title></title>
+		<link rel="stylesheet" href="css/index.css">
+		<script src="scripts/jquery.2.1.4.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				var $body = $('body');
+
+				var $image = $('#image');
+				var finalPos = 50;
+				var imageHeight = $image.height();
+				var scaleFactor = 1.2;
+				$image.on('click', function(e){
+					var positionFromTop = $image.offset().top - $(document).scrollTop();
+					var translateY = ( finalPos + (scaleFactor-1)*imageHeight/2 - positionFromTop ) / scaleFactor ;
+					if($image.hasClass('zoomed')){
+						$image.css('transform', '');
+						$image.removeClass('zoomed');
+						$body.removeClass('overlay');
+					}
+					else{
+						var transformStr = 'scale(1.2) translateY('+translateY+'px)';
+						console.log(transformStr);
+						$image.css('transform', transformStr);
+						$image.addClass('zoomed');
+						$body.addClass('overlay');
+					}
+				});
+
+				$(document).on('scroll', function(){
+					if($image.hasClass('zoomed')){
+						$image.css('transform', '');
+						$image.removeClass('zoomed');
+						$body.removeClass('overlay');
+					}
+				});
+			});
+		</script>
 	</head>
 	<body>
-		<h1>hello, world</h1>
-		<a href="about.html">About Page</a>
-		<p>I am the danges</p>
-		<img src="images/breaching_whale.jpg" />
+		<div class="outer">
+			<div class="placeholder"></div>
+			<img id="image" src="images/breaching_whale.jpg" />
+		</div>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
+		<h2>Below the image</h2>
 	</body>
 </html>
